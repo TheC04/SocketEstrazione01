@@ -63,9 +63,9 @@
             // 
             // messages
             // 
-            this.messages.Location = new System.Drawing.Point(485, 59);
+            this.messages.Location = new System.Drawing.Point(416, 95);
             this.messages.Name = "messages";
-            this.messages.Size = new System.Drawing.Size(231, 280);
+            this.messages.Size = new System.Drawing.Size(231, 131);
             this.messages.TabIndex = 3;
             this.messages.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
@@ -73,13 +73,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 381);
+            this.ClientSize = new System.Drawing.Size(684, 381);
             this.Controls.Add(this.messages);
             this.Controls.Add(this.title);
             this.Controls.Add(this.name);
             this.Controls.Add(this.send);
-            this.MaximumSize = new System.Drawing.Size(486, 420);
-            this.MinimumSize = new System.Drawing.Size(486, 420);
+            this.MaximumSize = new System.Drawing.Size(700, 420);
+            this.MinimumSize = new System.Drawing.Size(700, 420);
             this.Name = "Form1";
             this.Text = "Client";
             this.ResumeLayout(false);

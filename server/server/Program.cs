@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace server
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// Punto di ingresso principale dell'applicazione.
