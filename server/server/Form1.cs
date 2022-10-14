@@ -23,10 +23,17 @@ namespace server
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            label1.Text = "Server: Acceso";
-            button1.Text = "Spegni";
-            Application.DoEvents();
-            StartListening();
+            if (button1.Text == "Accendi")
+            {
+                label1.Text = "Server: Acceso";
+                button1.Text = "Spegni";
+                Application.DoEvents();
+                StartListening();
+            }
+            else
+            {
+                this.Close();
+            }
         }
         public static void StartListening()
         {
