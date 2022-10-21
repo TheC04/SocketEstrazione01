@@ -23,6 +23,7 @@ namespace server
         public Form1()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls=false;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -31,6 +32,7 @@ namespace server
                 label1.Text = "Server: Acceso";
                 button1.Text = "Spegni";
                 on = true;
+                messages.Text = "Server acceso\n";
                 Application.DoEvents();
                 t = new Thread(StartListening);
                 t.Start();
@@ -38,6 +40,7 @@ namespace server
             else
             {
                 on = false;
+                messages.Text = messages.Text + "Server spento\n";
                 label1.Text = "Server: Spento";
                 button1.Text = "Accendi";
             }
@@ -57,11 +60,11 @@ namespace server
                 listener.Bind(localEndPoint);
                 listener.Listen(10);
 
-                while (true)
+                while (on)
                 {
                     Socket handler = listener.Accept();
                     data = null;
-                    while (on)
+                    while (true)
                     {
                         int bytesRec = handler.Receive(bytes);
                         data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
@@ -70,7 +73,7 @@ namespace server
                             break;
                         }
                     }
-                    MessageBox.Show(data.ToString().Split('<')[0]);
+                    ch_text("C:\t" + (data.ToString().Split('<')[0]) + "\n");
                     string a = "nope";
                     string s = data.Split(' ')[1];
                     foreach (string line in System.IO.File.ReadLines(@"../../../users/users.txt"))
@@ -84,11 +87,11 @@ namespace server
                     }
                     if (a == "nope")
                     {
-                        MessageBox.Show("He is not in the list");
+                        ch_text("S:\tHe is not in the list\n");
                     }
                     else
                     {
-                        MessageBox.Show("I give him number " + a);
+                        ch_text("S:\tI give him number " + a + "\n");
                     }
                     byte[] msg = Encoding.ASCII.GetBytes(a);
                     handler.Send(msg);
@@ -100,13 +103,12 @@ namespace server
             {
                 Console.WriteLine(e.ToString());
             }
-            MessageBox.Show("Connection closed");
+            ch_text("Connection closed\n");
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void ch_text(string s)
         {
-            t.Abort();
-            this.Close();
+            messages.Text+=s;
         }
     }
 }
