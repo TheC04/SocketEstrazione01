@@ -44,7 +44,7 @@ namespace client
                     int bytesSent = send.Send(msg);
 
                     int bytesRec = send.Receive(bytes);
-                    if (bytes.ToString() == "You are not in the list. If you want to be added contact the developer")
+                    if (Encoding.ASCII.GetString(bytes, 0, bytesRec) == "nope")
                     {
                         messages.Text = messages.Text + ("S:\tYou are not in the list. If you want to be added contact the developer");
                     }

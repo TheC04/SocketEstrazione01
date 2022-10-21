@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace server
 {
@@ -16,6 +17,8 @@ namespace server
     {
 
         public static string data = null;
+        bool on = false;
+        Thread t;
 
         public Form1()
         {
@@ -23,19 +26,23 @@ namespace server
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (button1.Text == "Accendi")
+            if (!on)
             {
                 label1.Text = "Server: Acceso";
                 button1.Text = "Spegni";
+                on = true;
                 Application.DoEvents();
-                StartListening();
+                t = new Thread(StartListening);
+                t.Start();
             }
             else
             {
-                this.Close();
+                on = false;
+                label1.Text = "Server: Spento";
+                button1.Text = "Accendi";
             }
         }
-        public static void StartListening()
+        public void StartListening()
         {
             byte[] bytes = new Byte[1024];
 
@@ -54,7 +61,7 @@ namespace server
                 {
                     Socket handler = listener.Accept();
                     data = null;
-                    while (true)
+                    while (on)
                     {
                         int bytesRec = handler.Receive(bytes);
                         data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
@@ -77,7 +84,6 @@ namespace server
                     }
                     if (a == "nope")
                     {
-                        a = "You are not in the list. If you want to be added contact the developer";
                         MessageBox.Show("He is not in the list");
                     }
                     else
@@ -95,6 +101,12 @@ namespace server
                 Console.WriteLine(e.ToString());
             }
             MessageBox.Show("Connection closed");
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            t.Abort();
+            this.Close();
         }
     }
 }
