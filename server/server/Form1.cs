@@ -36,6 +36,7 @@ namespace server
                 Application.DoEvents();
                 t = new Thread(StartListening);
                 t.Start();
+                t.IsBackground = true;
             }
             else
             {
