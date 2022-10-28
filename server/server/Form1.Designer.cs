@@ -55,7 +55,7 @@
             // 
             // messages
             // 
-            this.messages.Location = new System.Drawing.Point(315, 78);
+            this.messages.Location = new System.Drawing.Point(319, 56);
             this.messages.Name = "messages";
             this.messages.Size = new System.Drawing.Size(171, 161);
             this.messages.TabIndex = 2;
