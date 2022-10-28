@@ -29,10 +29,10 @@ namespace server
         {
             if (!on)
             {
-                label1.Text = "Server: Acceso";
-                button1.Text = "Spegni";
+                label1.Text = "Server: On";
+                button1.Text = "Turn Off";
                 on = true;
-                messages.Text = "Server acceso\n";
+                messages.Text = "Server on\n";
                 Application.DoEvents();
                 t = new Thread(StartListening);
                 t.Start();
@@ -40,9 +40,9 @@ namespace server
             else
             {
                 on = false;
-                messages.Text = messages.Text + "Server spento\n";
-                label1.Text = "Server: Spento";
-                button1.Text = "Accendi";
+                messages.Text = messages.Text + "Server off\n";
+                label1.Text = "Server: Off";
+                button1.Text = "Turn on";
             }
         }
         public void StartListening()
