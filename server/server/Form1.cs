@@ -57,8 +57,11 @@ namespace server
 
             try
             {
-                listener.Bind(localEndPoint);
-                listener.Listen(10);
+                if (on)
+                {
+                    listener.Bind(localEndPoint);
+                    listener.Listen(10);
+                }
 
                 while (on)
                 {
@@ -87,11 +90,11 @@ namespace server
                     }
                     if (a == "nope")
                     {
-                        ch_text("S:\tHe is not in the list\n");
+                        ch_text("S:\tYou are not in the list\n");
                     }
                     else
                     {
-                        ch_text("S:\tI give him number " + a + "\n");
+                        ch_text("S:\tI give you number " + a + "\n");
                     }
                     byte[] msg = Encoding.ASCII.GetBytes(a);
                     handler.Send(msg);
